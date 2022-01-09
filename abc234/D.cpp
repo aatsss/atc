@@ -19,7 +19,7 @@ int main()
 
     /* priority queue: defaultでは最大値が取り出される． */
     priority_queue<int,vector<int>,greater<int>> que;
-    rep(i,N) que.push(P[i]);
+    rep(i,K) que.push(P[i]);
     cout << que.top() << endl;  /* topは要素にアクセス（削除はしない） */
     repi(i,K,N){
         if(que.top() < P[i]){
