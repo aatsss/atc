@@ -11,40 +11,22 @@ const int MOD = 1000000007;
 int main()
 {
     ll N,K; cin >> N >> K;
-    vector<ll> is_there;
-    rep(i,N+1){
-        is_there.push_back(1);
-    }
-    vector<ll> vec;
+    vector<int> P;
     rep(i,N){
-        ll tmp; cin >> tmp;
-        vec.push_back(tmp);
+        int tmp; cin >> tmp;
+        P.push_back(tmp);
     }
 
-    ll candidate;
-    vector<ll> init;
-
-    candidate = N-K+1;
-    for(int i=N-1;i>=K;i--){
-        init.push_back(candidate);
-        is_there[vec[i]] = 0;
-        if(candidate > vec[i]){
-            for(int j=candidate;j<=N;j++){
-                if(is_there[j]==1){
-                    candidate = j;
-                    break;
-                }
-            }
-        }else{
-            
-        }
-
-    }
-    cout << candidate << endl;
+    /* priority queue: defaultでは最大値が取り出される． */
+    priority_queue<int,vector<int>,greater<int>> que;
+    rep(i,N) que.push(P[i]);
+    cout << que.top() << endl;  /* topは要素にアクセス（削除はしない） */
     repi(i,K,N){
-            init.push_back(vec[i]);
-            sort(init.rbegin(),init.rend());
-            cout << init[K-1] << endl;
+        if(que.top() < P[i]){
+            que.pop();
+            que.push(P[i]);
+        }
+        cout << que.top() << endl;
     }
     return 0;
 }
