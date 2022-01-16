@@ -12,29 +12,21 @@ int main()
 {
     int N,Q; cin >> N >> Q;
     vector<int> A(N);
-    int backet[MAX][MAX];
-    multimap<int,int> mp{};
+    map<int,vector<int>> mp;
     rep(i,N) {
         int num; cin >> num;
         A[i] = num;
-        mp.insert(make_pair(num,i+1));
+        mp[num].push_back(i+1);
     }
 
     rep(i,Q){
         int x,k; cin >> x >> k;
-        x--;k--;
-        auto itr = mp.find(x);
-        if(itr != mp.end()){
-            int n = mp.count(1);
-            for(int j = 0; j < n; j++){
-                if (j == k){
-                    cout << "found: at index " << i << endl;
-                }
-            }
+        x;k--;
+        if(k >= 0 && k < mp[x].size() && mp[x][k] != 0){
+            cout << mp[x][k] << endl;
         }else{
             cout << -1 << endl;
         }
-        
     }
     
     return 0;
